@@ -70,6 +70,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -108,6 +111,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <TargetMachine>MachineX64</TargetMachine>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -129,10 +134,16 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\boost.1.82.0\build\boost.targets" Condition="Exists('..\packages\boost.1.82.0\build\boost.targets')" />
     <Import Project="..\packages\gmock.1.11.0\build\native\gmock.targets" Condition="Exists('..\packages\gmock.1.11.0\build\native\gmock.targets')" />
+    <Import Project="..\packages\boost_log-vc143.1.82.0\build\boost_log-vc143.targets" Condition="Exists('..\packages\boost_log-vc143.1.82.0\build\boost_log-vc143.targets')" />
+    <Import Project="..\packages\boost_filesystem-vc143.1.82.0\build\boost_filesystem-vc143.targets" Condition="Exists('..\packages\boost_filesystem-vc143.1.82.0\build\boost_filesystem-vc143.targets')" />
+    <Import Project="..\packages\boost_thread-vc143.1.82.0\build\boost_thread-vc143.targets" Condition="Exists('..\packages\boost_thread-vc143.1.82.0\build\boost_thread-vc143.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -140,5 +151,8 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\boost.1.82.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.82.0\build\boost.targets'))" />
     <Error Condition="!Exists('..\packages\gmock.1.11.0\build\native\gmock.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\gmock.1.11.0\build\native\gmock.targets'))" />
+    <Error Condition="!Exists('..\packages\boost_log-vc143.1.82.0\build\boost_log-vc143.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_log-vc143.1.82.0\build\boost_log-vc143.targets'))" />
+    <Error Condition="!Exists('..\packages\boost_filesystem-vc143.1.82.0\build\boost_filesystem-vc143.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_filesystem-vc143.1.82.0\build\boost_filesystem-vc143.targets'))" />
+    <Error Condition="!Exists('..\packages\boost_thread-vc143.1.82.0\build\boost_thread-vc143.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_thread-vc143.1.82.0\build\boost_thread-vc143.targets'))" />
   </Target>
 </Project>
